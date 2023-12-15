@@ -10,4 +10,5 @@ platform "pbt"
     provides [mainForHost]
 
 mainForHost : {} -> Str
-mainForHost = main
+mainForHost = \{} ->
+    main {}

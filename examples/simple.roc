@@ -4,5 +4,8 @@ app "simple"
     ]
     provides [main] to pf
 
-main = \{} -> "lets go"
+main = \{} -> 
+    dbg ("a dbg message")
+
+    "lets go"
 
