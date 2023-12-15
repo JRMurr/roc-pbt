@@ -4,6 +4,10 @@
 default:
     @just --list
 
+
+simple:
+    roc run examples/simple.roc
+
 gen-glue:
     #!/usr/bin/env bash
     set -euxo pipefail
