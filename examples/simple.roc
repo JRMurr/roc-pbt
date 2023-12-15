@@ -4,8 +4,10 @@ app "simple"
     ]
     provides [main] to pf
 
-main = \{} -> 
-    dbg ("a dbg message")
+main = \{} ->
+    dbg "a dbg message"
 
-    "lets go"
+    [1, 2, 3, 4]
+    |> List.sum
+    |> Num.toStr
 
