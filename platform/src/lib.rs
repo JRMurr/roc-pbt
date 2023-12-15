@@ -12,11 +12,17 @@ pub extern "C" fn rust_main() -> i32 {
     0
 }
 
+/// # Safety
+///
+/// roc_alloc
 #[no_mangle]
 pub unsafe extern "C" fn roc_alloc(size: usize, _alignment: u32) -> *mut c_void {
     libc::malloc(size)
 }
 
+/// # Safety
+///
+/// roc_realloc
 #[no_mangle]
 pub unsafe extern "C" fn roc_realloc(
     c_ptr: *mut c_void,
@@ -24,14 +30,20 @@ pub unsafe extern "C" fn roc_realloc(
     _old_size: usize,
     _alignment: u32,
 ) -> *mut c_void {
-    return libc::realloc(c_ptr, new_size);
+    libc::realloc(c_ptr, new_size)
 }
 
+/// # Safety
+///
+/// roc_dealloc
 #[no_mangle]
 pub unsafe extern "C" fn roc_dealloc(c_ptr: *mut c_void, _alignment: u32) {
-    return libc::free(c_ptr);
+    libc::free(c_ptr)
 }
 
+/// # Safety
+///
+/// roc_panic
 #[no_mangle]
 pub unsafe extern "C" fn roc_panic(msg: *mut RocStr, tag_id: u32) {
     match tag_id {
@@ -46,22 +58,34 @@ pub unsafe extern "C" fn roc_panic(msg: *mut RocStr, tag_id: u32) {
     std::process::exit(1);
 }
 
+/// # Safety
+///
+/// roc_dbg
 #[no_mangle]
 pub unsafe extern "C" fn roc_dbg(loc: *mut RocStr, msg: *mut RocStr, src: *mut RocStr) {
     eprintln!("[{}] {} = {}", &*loc, &*src, &*msg);
 }
 
+/// # Safety
+///
+/// roc_memset
 #[no_mangle]
 pub unsafe extern "C" fn roc_memset(dst: *mut c_void, c: i32, n: usize) -> *mut c_void {
     libc::memset(dst, c, n)
 }
 
+/// # Safety
+///
+/// roc_getppid
 #[cfg(unix)]
 #[no_mangle]
 pub unsafe extern "C" fn roc_getppid() -> libc::pid_t {
     libc::getppid()
 }
 
+/// # Safety
+///
+/// roc_mmap
 #[cfg(unix)]
 #[no_mangle]
 pub unsafe extern "C" fn roc_mmap(
@@ -75,6 +99,9 @@ pub unsafe extern "C" fn roc_mmap(
     libc::mmap(addr, len, prot, flags, fd, offset)
 }
 
+/// # Safety
+///
+/// roc_shm_open
 #[cfg(unix)]
 #[no_mangle]
 pub unsafe extern "C" fn roc_shm_open(
