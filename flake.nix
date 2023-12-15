@@ -44,10 +44,14 @@
               [
                 rocFull
                 rust-shell
+
+                just
               ];
 
             shellHook = ''
               export ROC_LSP_PATH=${rocFull}/bin/roc_ls
+
+              export ROC_SRC_CODE_PATH=${roc}
             '';
           };
         };
