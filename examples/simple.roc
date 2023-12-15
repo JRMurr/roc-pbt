@@ -3,6 +3,7 @@ app "simple"
     imports [
         pf.Task,
         pf.Generator,
+        pf.Stdout,
     ]
     provides [main] to pf
 
@@ -14,11 +15,13 @@ dbge = \x ->
 main =
     dbg "test"
 
+    _ <- Stdout.line "test123" |> Task.await
+
     val <- Generator.genStr |> Task.await
 
     dbg val
 
-    Task.err 1
+    Task.ok {}
 
 # val <- Generator.genU64 |> Task.await
 # dbg

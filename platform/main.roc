@@ -3,6 +3,7 @@ platform "pbt"
     exposes [
         Task,
         Generator,
+        Stdout,
     ]
     packages {}
     imports [
@@ -10,5 +11,5 @@ platform "pbt"
     ]
     provides [mainForHost]
 
-mainForHost : Task {} I32 as Fx
+mainForHost : Task {} I32
 mainForHost = main
