@@ -16,18 +16,15 @@
 #![allow(clippy::needless_borrow)]
 #![allow(clippy::clone_on_copy)]
 
-
-
-
 pub fn mainForHost() -> roc_std::RocStr {
     extern "C" {
-        fn roc__mainForHost_1_exposed_generic(_: *mut roc_std::RocStr, );
+        fn roc__mainForHost_1_exposed_generic(_: *mut roc_std::RocStr);
     }
 
     let mut ret = core::mem::MaybeUninit::uninit();
 
     unsafe {
-        roc__mainForHost_1_exposed_generic(ret.as_mut_ptr(), );
+        roc__mainForHost_1_exposed_generic(ret.as_mut_ptr());
 
         ret.assume_init()
     }

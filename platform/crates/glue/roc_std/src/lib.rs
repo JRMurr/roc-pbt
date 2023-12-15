@@ -1,6 +1,9 @@
 //! Provides Rust representations of Roc data structures.
 // #![cfg_attr(not(feature = "std"), no_std)]
 #![crate_type = "lib"]
+#![allow(warnings)]
+#![allow(clippy)]
+#![allow(unknown_lints)]
 
 use arrayvec::ArrayString;
 use core::cmp::Ordering;
