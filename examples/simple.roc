@@ -4,10 +4,15 @@ app "simple"
     ]
     provides [main] to pf
 
-main = \{} ->
-    dbg "a dbg message"
+dbge = \x ->
+    dbg x
 
+    x
+
+main = \{} ->
     [1, 2, 3, 4]
+    |> dbge
+    |> List.map (\x -> x * 100)
     |> List.sum
     |> Num.toStr
 
