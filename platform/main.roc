@@ -2,11 +2,11 @@ platform "pbt"
     requires {} { main : Task {} I32 }
     exposes [
         Task,
+        Generator,
     ]
     packages {}
     imports [
         Task.{ Task },
-        # Http.{ Request, Method, Response },
     ]
     provides [mainForHost]
 

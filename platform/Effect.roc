@@ -6,6 +6,10 @@ hosted Effect
         always,
         forever,
         loop,
+
+        # rust exposed generators
+        genU64,
+        genStr,
     ]
     imports [
         # InternalHttp.{ Request, Response },
@@ -15,3 +19,7 @@ hosted Effect
         # InternalCommand,
     ]
     generates Effect with [after, map, always, forever, loop]
+
+genU64 : Effect U64
+
+genStr : Effect Str

@@ -1,5 +1,6 @@
 use roc_app::mainForHost;
 
+mod generators;
 mod required_externs;
 
 // use std::ffi::CStr;
