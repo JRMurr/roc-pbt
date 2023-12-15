@@ -1,6 +1,7 @@
 app "simple"
     packages { pf: "../platform/main.roc" }
     imports [
+        pf.Task,
     ]
     provides [main] to pf
 
@@ -9,10 +10,10 @@ dbge = \x ->
 
     x
 
-main = \{} ->
+main =
     [1, 2, 3, 4]
     |> dbge
-    |> List.map (\x -> x * 100)
     |> List.sum
-    |> Num.toStr
+    |> Num.toI32
+    |> Task.err
 

@@ -9,6 +9,6 @@ mod required_externs;
 #[no_mangle]
 pub extern "C" fn rust_main() -> i32 {
     let res = mainForHost();
-    println!("I did rust stuff: ${res}");
+    println!("I did rust stuff: ({res:?})");
     0
 }

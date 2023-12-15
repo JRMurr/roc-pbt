@@ -1,14 +1,14 @@
 platform "pbt"
-    requires {} { main : {} -> Str }
+    requires {} { main : Task {} I32 }
     exposes [
+        Task,
     ]
     packages {}
     imports [
-        # Task.{ Task },
+        Task.{ Task },
         # Http.{ Request, Method, Response },
     ]
     provides [mainForHost]
 
-mainForHost : {} -> Str
-mainForHost = \{} ->
-    main {}
+mainForHost : Task {} I32 as Fx
+mainForHost = main

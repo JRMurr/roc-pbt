@@ -16,15 +16,40 @@
 #![allow(clippy::needless_borrow)]
 #![allow(clippy::clone_on_copy)]
 
-pub fn mainForHost() -> roc_std::RocStr {
+
+
+
+#[repr(C)]
+#[derive(Debug)]
+pub struct RocFunction_72 {
+    closure_data: Vec<u8>,
+}
+
+impl RocFunction_72 {
+    pub fn force_thunk(mut self) -> roc_std::RocResult<(), i32> {
+        extern "C" {
+            fn roc__mainForHost_0_caller(arg0: *const (), closure_data: *mut u8, output: *mut roc_std::RocResult<(), i32>);
+        }
+
+        let mut output = core::mem::MaybeUninit::uninit();
+
+        unsafe {
+            roc__mainForHost_0_caller(&(), self.closure_data.as_mut_ptr(), output.as_mut_ptr());
+
+            output.assume_init()
+        }
+    }
+}
+
+pub fn mainForHost() -> roc_std::RocResult<(), i32> {
     extern "C" {
-        fn roc__mainForHost_1_exposed_generic(_: *mut roc_std::RocStr);
+        fn roc__mainForHost_1_exposed_generic(_: *mut roc_std::RocResult<(), i32>, );
     }
 
     let mut ret = core::mem::MaybeUninit::uninit();
 
     unsafe {
-        roc__mainForHost_1_exposed_generic(ret.as_mut_ptr());
+        roc__mainForHost_1_exposed_generic(ret.as_mut_ptr(), );
 
         ret.assume_init()
     }
