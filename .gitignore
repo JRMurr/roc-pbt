@@ -1,2 +1,11 @@
 .direnv
 result
+
+target
+
+
+# roc
+dynhost
+libapp.so
+linux-x64.rh
+metadata_linux-x64.rm

@@ -1,0 +1,22 @@
+[package]
+name = "roc-pbt"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "host"
+path = "src/lib.rs"
+crate-type = ["staticlib", "rlib"]
+
+[[bin]]
+name = "host"
+path = "src/main.rs"
+
+
+[dependencies]
+roc_app = { path = "./glue/roc_app" }
+roc_std = { path = "./glue/roc_std" }
+
+libc = "0.2"
