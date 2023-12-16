@@ -1,16 +1,10 @@
-// use std::{alloc::Layout, mem::MaybeUninit};
-
 use std::{alloc::Layout, mem::MaybeUninit};
-
-use roc_app::mainForHost;
 
 mod generators;
 mod required_externs;
 
 #[no_mangle]
 pub extern "C" fn rust_main() -> i32 {
-    println!("ENTERING ROC");
-
     let size = unsafe { roc_main_size() } as usize;
     let layout = Layout::array::<u8>(size).unwrap();
 
@@ -45,16 +39,19 @@ extern "C" {
     fn size_Fx_result() -> i64;
 }
 
+/// # Safety
+///
+/// call_the_closure
 pub unsafe fn call_the_closure(closure_data_ptr: *const u8) -> u8 {
     let size = size_Fx_result() as usize;
     let layout = Layout::array::<u8>(size).unwrap();
-    let buffer = std::alloc::alloc(layout) as *mut u8;
+    let buffer = std::alloc::alloc(layout);
 
     call_Fx(
         // This flags pointer will never get dereferenced
         MaybeUninit::uninit().as_ptr(),
-        closure_data_ptr as *const u8,
-        buffer as *mut u8,
+        closure_data_ptr,
+        buffer,
     );
 
     std::alloc::dealloc(buffer, layout);
