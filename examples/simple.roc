@@ -1,7 +1,7 @@
 app "simple"
     packages { pf: "../platform/main.roc" }
     imports [
-        pf.Task,
+        pf.Task.{Task},
         pf.Generator,
         pf.Stdout,
     ]
@@ -12,24 +12,9 @@ dbge = \x ->
 
     x
 
+main : Task {} I32
 main =
-    dbg "test"
-
-    _ <- Stdout.line "test123" |> Task.await
-
-    val <- Generator.genStr |> Task.await
-
-    dbg val
-
-    Task.ok {}
-
-# val <- Generator.genU64 |> Task.await
-# dbg
-#     val
-# [val, 10]
-# |> dbge
-# |> List.sum
-# |> Num.toI32
-# |> dbge
-# |> Task.err
+    val <- Generator.genStr |> dbge |> Task.await 
+    {} <- Stdout.line val |> dbge |> Task.await
+    Task.err 500
 

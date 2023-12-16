@@ -1,6 +1,6 @@
-use std::{alloc::Layout, mem::MaybeUninit};
+// use std::{alloc::Layout, mem::MaybeUninit};
 
-use roc_app::{mainForHost, RocFunction_72};
+use roc_app::mainForHost;
 
 mod generators;
 mod required_externs;
@@ -11,10 +11,9 @@ mod required_externs;
 
 #[no_mangle]
 pub extern "C" fn rust_main() -> i32 {
-    // RocFunction_72  ::force_thunk(self)
-
+    println!("ENTERTING ROC");
     let res = mainForHost();
-    println!("I did rust stuff: ({res:?})");
+    println!("LEAVING ROC\nRES:({res:?})");
     0
 }
 
