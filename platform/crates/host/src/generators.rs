@@ -14,7 +14,5 @@ pub extern "C" fn roc_fx_genStr(out: *mut RocStr) {
 
 #[no_mangle]
 pub extern "C" fn roc_fx_stdoutLine(line: &RocStr) {
-    dbg!(line);
-    let string = line.as_str();
-    println!("{}", string);
+    println!("{}", line.as_str());
 }
